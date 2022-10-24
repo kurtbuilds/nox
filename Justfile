@@ -7,3 +7,6 @@ alias r := run
 
 install:
     cargo install --path cli
+
+check:
+    cargo check

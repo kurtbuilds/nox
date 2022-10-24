@@ -1,18 +1,15 @@
 use std::path::Path;
 use std::process::Command;
 use anyhow::Result;
+use serde::{Deserialize, Serialize};
 use crate::command::util::write_file;
 use crate::ExitOk;
+use model::Package;
+use crate::file_backed_struct::FileBackedStruct;
 
 pub enum Template {
     Lib,
     Bin,
-}
-
-impl Default for Template {
-    fn default() -> Self {
-        Self::Bin
-    }
 }
 
 static NEW_SCRIPT: &str = r#"
@@ -74,5 +71,8 @@ pub fn new(name: String, template: Template) -> Result<()> {
         }
     }
     write_file(path.join("Justfile"), JUSTFILE)?;
+
+    let mut package = FileBackedStruct::<Package>::open(path.join("package.json"))?;
+    package.name = Some(name);
     Ok(())
 }

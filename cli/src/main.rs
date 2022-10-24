@@ -1,7 +1,9 @@
 mod command;
 mod exit_status;
+mod file_backed_struct;
 
 pub use exit_status::ExitOk;
+pub use file_backed_struct::FileBackedStruct;
 
 use std::path::PathBuf;
 
