@@ -1,0 +1,15 @@
+
+set dotenv-load := true
+
+export PATH := "./node_modules/.bin:" + env_var('PATH')
+
+help:
+    @just --list --unsorted
+
+# Install all packages, build development assets. Make the project ready to run in development.
+bootstrap:
+    pnpm install
+
+check:
+    tsc --noEmit
+alias c := check
