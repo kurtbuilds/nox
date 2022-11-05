@@ -79,7 +79,6 @@ pub enum RepositoryReference {
 }
 
 
-
 #[derive(Clone, Debug, Default, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Package {
@@ -185,4 +184,20 @@ pub struct Package {
     /// file.
     #[serde(flatten)]
     pub others: BTreeMap<String, Value>,
+
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub pnpm: Option<Pnpm>,
+}
+
+#[derive(Default, Serialize, Deserialize, Debug, Clone)]
+pub struct Pnpm {
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub overrides: Option<BTreeMap<String, String>>,
+}
+
+
+impl Pnpm {
+    pub fn is_empty(&self) -> bool {
+        self.overrides.is_none()
+    }
 }

@@ -11,6 +11,7 @@ clap = { version = "4.0.18", features = ["derive"] }
 serde = { version = "1.0.147", features = ["derive"] }
 model = { path = "../model" }
 serde_json = "1.0.87"
+semver = "1.0.14"
 
 [[bin]]
 name = "nox"

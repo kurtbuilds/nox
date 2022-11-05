@@ -1,0 +1,16 @@
+{
+  "name": "nox",
+  "version": "1.2.0",
+  "description": "",
+  "license": "ISC",
+  "author": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "pnpm": {
+    "overrides": {
+      "foo": "link:./cli"
+    }
+  }
+}

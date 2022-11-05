@@ -9,6 +9,7 @@ use std::path::PathBuf;
 
 use clap::{Parser, Subcommand, ValueEnum};
 use serde::{Deserialize, Serialize};
+use crate::command::strings_into_overrides;
 
 #[derive(Parser)]
 #[command(author, version, about)]
@@ -18,7 +19,7 @@ struct Cli {
 }
 
 #[derive(Clone, ValueEnum)]
-enum SemverLevel {
+pub enum SemverLevel {
     Major,
     Minor,
     Patch,
@@ -38,7 +39,13 @@ enum Command {
     },
     Publish {
 
+    },
+    Override {
+        #[clap(long, action)]
+        off: bool,
+        overrides: Vec<String>
     }
+
 }
 
 fn main() -> anyhow::Result<()> {
@@ -48,10 +55,18 @@ fn main() -> anyhow::Result<()> {
             command::new(name, if lib { command::Template::Lib } else { command::Template::Bin })
         }
         Command::SetVersion { bump } => {
-            unimplemented!()
+            command::bump(bump)
         }
         Command::Publish {} => {
             unimplemented!()
+        }
+        Command::Override { off , overrides } => {
+            if off {
+                command::clear_overrides("./package.json".into())
+            } else {
+                let overrides = strings_into_overrides(overrides)?;
+                command::add_override(overrides, "./package.json".into())
+            }
         }
     }
 }
