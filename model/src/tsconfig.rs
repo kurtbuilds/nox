@@ -1,6 +1,5 @@
 use std::{collections::HashMap};
 use serde::{Deserialize, Deserializer};
-use serde_json::Value;
 /// Module resolution mode
 ///
 /// Specify the module resolution strategy: 'node' (Node.js) or 'classic' (used in TypeScript before the release of 1.6). You probably won’t need to use classic in modern code.

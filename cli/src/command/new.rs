@@ -1,7 +1,6 @@
 use std::path::Path;
 use std::process::Command;
 use anyhow::Result;
-use serde::{Deserialize, Serialize};
 use crate::command::util::write_file;
 use crate::ExitOk;
 use model::Package;
@@ -59,7 +58,7 @@ pub fn new(name: String, template: Template) -> Result<()> {
         .arg("-c")
         .arg(NEW_SCRIPT)
         .status()?
-        .exit_ok()?;
+        .exit()?;
 
     let path = Path::new(&name);
     match template {

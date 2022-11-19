@@ -2,11 +2,11 @@ use std::process::ExitStatus;
 use anyhow::{Result, anyhow};
 
 pub trait ExitOk {
-    fn exit_ok(self) -> Result<()>;
+    fn exit(self) -> Result<()>;
 }
 
 impl ExitOk for ExitStatus {
-    fn exit_ok(self) -> Result<()> {
+    fn exit(self) -> Result<()> {
         if self.success() {
             Ok(())
         } else {

@@ -8,7 +8,6 @@ pub use file_backed_struct::FileBackedStruct;
 use std::path::PathBuf;
 
 use clap::{Parser, Subcommand, ValueEnum};
-use serde::{Deserialize, Serialize};
 use crate::command::strings_into_overrides;
 
 #[derive(Parser)]
@@ -61,12 +60,8 @@ fn main() -> anyhow::Result<()> {
             unimplemented!()
         }
         Command::Override { off , overrides } => {
-            if off {
-                command::clear_overrides("./package.json".into())
-            } else {
-                let overrides = strings_into_overrides(overrides)?;
-                command::add_override(overrides, "./package.json".into())
-            }
+            let overrides = strings_into_overrides(overrides)?;
+            command::run_override(off, overrides, PathBuf::from("./package.json"))
         }
     }
 }

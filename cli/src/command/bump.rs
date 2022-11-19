@@ -1,4 +1,3 @@
-use std::borrow::Cow;
 use std::path::Path;
 use model::Package;
 use semver::Version;
