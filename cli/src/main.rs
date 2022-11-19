@@ -39,9 +39,11 @@ enum Command {
     Publish {
 
     },
+    /// Override a path with a local (possibly modified) version
     Override {
         #[clap(long, action)]
         off: bool,
+        /// Accepts <path> or <package>=<path>.
         overrides: Vec<String>
     }
 
