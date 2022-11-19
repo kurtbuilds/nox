@@ -19,8 +19,6 @@ nox override <path>
 nox override <package_name>=<path>
 ```
 
-```
-
 # Installation
 
 ```bash
